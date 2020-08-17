@@ -1,48 +1,64 @@
 package ooit_java_v2_drawing;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class Test {
-	private static String shape = "";
+public class Test implements ActionListener {
+	private String shape = "";
+	JFrame window = new JFrame("Iscrtava");
+	PnlDrawing panel = new PnlDrawing();
+	JPanel btnPanel = new JPanel();
+	JButton buttonOnPanel = new JButton("Click");
+	JButton circle = new JButton("Circle");
+	JButton rectangle = new JButton("Rectangle");
+
+	public Test() {
+
+		panel.setBackground(Color.CYAN);
+		btnPanel.setBackground(Color.DARK_GRAY);
+		btnPanel.add(buttonOnPanel);
+		btnPanel.add(circle);
+		btnPanel.add(rectangle);
+
+		buttonOnPanel.addActionListener(this);
+		circle.addActionListener(this);
+		rectangle.addActionListener(this);
+
+		window.add(panel, BorderLayout.CENTER);
+		window.add(btnPanel, BorderLayout.PAGE_END);
+
+		window.setSize(800, 600);
+		window.setVisible(true);
+		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+	}
+
 	public static void main(String[] args) {
 		System.out.println("Here we test...");
-		
-		JFrame window = new JFrame("Iscrtava");
-		PnlDrawing panel = new PnlDrawing();
-		JButton button = new JButton("draw Circle");
-		JButton button1 = new JButton("draw Rectangle");
-		window.setContentPane(panel);
-		panel.add(button);
-		panel.add(button1);
-		button.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				shape = "Circle";
-				panel.addMouseListener(new ShapeClickListener(panel,shape));
-				
-				
-			}
-			
-		});
-		
-		button1.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				shape = "Rectangle";
-				panel.addMouseListener(new ShapeClickListener(panel, shape));
-				
-			}
-			
-		});
-		
-//		panel.addMouseListener(new ShapeClickListener(panel));
-		window.setSize(500,500);
-		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		window.setVisible(true);
+		new Test();
+
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if (e.getSource().equals(circle)) {
+			this.shape = "Circle";
+			// logika koja poziva implementirati
+			panel.addMouseListener(new ShapeClickListener(panel,shape));
+		} else if (e.getSource().equals(rectangle)) {
+			this.shape = "Rectangle";
+			// logika
+			panel.addMouseListener(new ShapeClickListener(panel,shape));
+		} else {
+			System.out.println("ne radi i dalje");
+		}
+	}
+
 }
