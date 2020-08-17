@@ -16,17 +16,12 @@ public class Rectangle extends Shape {
 		super();
 	}
 
-	
-	
-
 
 	public Rectangle(double width, double height) {
 		super();
 		this.width = width;
 		this.height = height;
 	}
-
-
 
 
 
@@ -94,7 +89,7 @@ public class Rectangle extends Shape {
 	public void draw(Graphics g) 
 	{
 		g.setColor(color.BLUE);
-		g.fillRect(20, 30, (int)width, (int)height);
+		g.fillRect((int)getWidth(), (int)getHeight(), (int)width, (int)height);
 	}
 	
 	

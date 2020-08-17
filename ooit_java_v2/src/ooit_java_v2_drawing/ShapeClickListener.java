@@ -16,7 +16,7 @@ public class ShapeClickListener extends MouseAdapter {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// if button clicked add shape i modalni dijalog
-		panel.addShape(new Rectangle(20, 10, e.getX(), Color.BLUE));
+		panel.addShape(new Rectangle(e.getX(), e.getY(), 30, Color.BLUE));
 		
 	}
 }
