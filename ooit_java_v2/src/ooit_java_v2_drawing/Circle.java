@@ -56,5 +56,6 @@ public class Circle extends Shape {
 	@Override
 	public void draw(Graphics g) {
 		g.drawOval(x, y, diameter, diameter);
+		g.fillOval(x, y, diameter, diameter);
 	}
 }

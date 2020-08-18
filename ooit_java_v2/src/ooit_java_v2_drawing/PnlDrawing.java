@@ -14,10 +14,13 @@ public class PnlDrawing extends JPanel {
 		this.repaint();
 	}
 	
+	public ArrayList<Shape> getShapes(){
+		return shapes;
+	}
+	
 	@Override
 	public void paint(Graphics g){
-		// Shape krug = new Circle();
-		// krug.draw(Graphics g);
+		super.paint(g);
 		for(Shape s : shapes) {
 			s.draw(g);
 		}
