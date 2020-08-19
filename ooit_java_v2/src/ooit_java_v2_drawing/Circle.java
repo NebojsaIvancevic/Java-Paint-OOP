@@ -10,7 +10,6 @@ public class Circle extends Shape {
 	private Color color;
 
 	public Circle(int x, int y, int diameter, Color color) {
-		super();
 		this.x = x;
 		this.y = y;
 		this.diameter = diameter;
@@ -49,13 +48,35 @@ public class Circle extends Shape {
 		this.color = color;
 	}
 
-	public void kik() {
-		System.out.println("WTFA");
-	}
+	
+	
+	
+	
+	
+	
 	
 	@Override
 	public void draw(Graphics g) {
+		g.setColor(this.color);
 		g.drawOval(x, y, diameter, diameter);
 		g.fillOval(x, y, diameter, diameter);
+	}
+
+	@Override
+	public void moveBy(int byX, int byY) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean contains(int x, int y) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
