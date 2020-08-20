@@ -17,6 +17,27 @@ public class PnlDrawing extends JPanel {
 	public ArrayList<Shape> getShapes(){
 		return shapes;
 	}
+	public void removeShape(Shape shape) {
+		shapes.remove(shape);
+		this.repaint();
+	}
+	
+	public Shape findShapeAtPoint(int x, int y) {
+		boolean found = false;
+		int i = 0;
+		
+		while(!found && (i<shapes.size()))
+		{
+			if(shapes.get(i).contains(x,y))
+				found = true;
+			else
+				i++;
+		}
+		if (found)
+			return shapes.get(i);
+		else
+			return null;	
+	}
 	
 	@Override
 	public void paint(Graphics g){

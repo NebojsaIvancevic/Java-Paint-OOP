@@ -47,12 +47,7 @@ public class Point extends Shape{
 	public String toString() {
 		return "(" + x + ", " + y + ")";
 	}
-	
-	
-	
-	
-	
-	
+
 	
 	public double distance(int x2, int y2) {
 		double dx = this.x - x2;
