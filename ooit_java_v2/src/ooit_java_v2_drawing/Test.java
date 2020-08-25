@@ -32,6 +32,7 @@ public class Test implements ActionListener {
 	private JButton point;
 	private JButton line;
 	private JButton color;
+	private JButton modify;
 
 	// Shape and Color
 	private String shape;
@@ -39,6 +40,7 @@ public class Test implements ActionListener {
 	private Color outerShapeColor;
 	private Shape currentShape;
 	private boolean selected;
+	private boolean mod;
 
 	public Test() {
 		shape = "";
@@ -55,6 +57,7 @@ public class Test implements ActionListener {
 		point = new JButton("Point");
 		line = new JButton("Line");
 		color = new JButton("Color");
+		modify = new JButton("Modify");
 
 		panel.setBackground(Color.YELLOW);
 		btnPanel.setBackground(Color.DARK_GRAY);
@@ -64,62 +67,73 @@ public class Test implements ActionListener {
 		btnPanel.add(line);
 		btnPanel.add(point);
 		btnPanel.add(color);
+		btnPanel.add(modify);
 
 		panel.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mouseClicked(MouseEvent me) {
 
-				Shape s = panel.findShapeAtPoint(me.getX(), me.getY());
+				Shape s = panel.findShapeAtPoint(me.getX(), me.getY()); // returns a selected shape
 				if (currentShape != null) {
 					currentShape.setSelected(false);
 					
 				}
 				if ((s != null) && (s != currentShape)) {
 					s.setSelected(true);
+					
+					
 				} else {
 					s = null;
 				}
-				currentShape = s;
+				currentShape = s;				
 				
-				
-				if(shape == "Circle") {
-				
-					if(currentShape instanceof Circle) {
-						((Circle) currentShape).getCenter().setX(50);
-						((Circle) currentShape).getCenter().setY(70);
-						try {
-							((Circle) currentShape).setRadius(50);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-						((Circle) currentShape).setSelected(false);
-						((Circle) currentShape).setColor(Color.RED);
-						((Circle) currentShape).setInnerColor(Color.BLUE);
-					} else {
-					panel.addShape(new Circle(new Point(me.getX(), me.getY()), 40, true, shapeColor,
-							outerShapeColor));
+				if(s instanceof Circle) {
+					((Circle) s).setSelected(false);
+					((Circle) s).getCenter().setX(Integer.parseInt(JOptionPane.showInputDialog("Unesite koordinatu X:")));
+					((Circle) s).getCenter().setY(Integer.parseInt(JOptionPane.showInputDialog("Unesite koordinatu Y:")));
+					try {
+						((Circle) s).setRadius(50);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					((Circle) s).setColor(Color.RED);
+					((Circle) s).setInnerColor(Color.BLUE);
+				//	panel.repaint();
+					
+					
+				} else if (s instanceof Rectangle) {
+					
+				    ((Rectangle) s).setSelected(true);
+					((Rectangle) s).getUpperLeftPoint().setX(Integer.parseInt(JOptionPane.showInputDialog("Unesite koordinatu X:")));
+					((Rectangle) s).getUpperLeftPoint().setY(Integer.parseInt(JOptionPane.showInputDialog("Unesite koordinatu Y:")));
+				((Rectangle) s).setHeight(Integer.parseInt(JOptionPane.showInputDialog("Unesite koordinatu Visinu:")));
+					((Rectangle) s).setWidth(Integer.parseInt(JOptionPane.showInputDialog("Unesite koordinatu Sirinu:")));
+					((Rectangle) s).setColor(Color.RED);
+				((Rectangle) s).setInnerColor(Color.BLUE);
+				} else {
+					
+					if (shape == "Rectangle") {
+						panel.addShape(new Rectangle(new Point(me.getX(), me.getY()), 20, 40,selected,shapeColor,
+										outerShapeColor));
+					}
+					
+					if(shape == "Circle") { 
+						panel.addShape(new Circle(new Point(me.getX(), me.getY()), 40, selected, shapeColor,
+								outerShapeColor));
+						} else if (shape == "Point") {
+						panel.addShape(new Point(me.getX(), me.getY(), selected, shapeColor));
+					} else if (shape == "Line") {
+						panel.addShape(new Line(new Point(me.getX(), me.getY()), new Point(me.getX(), me.getY()), selected,
+								shapeColor));
 					}
 				}
 				
-				if (shape == "Rectangle") {
-					panel.addShape(new Rectangle(new Point(me.getX(), me.getY()), 20, 40, selected, shapeColor,
-									outerShapeColor));
-				} else if (shape == "Point") {
-					panel.addShape(new Point(me.getX(), me.getY(), selected, shapeColor));
-				} else if (shape == "Line") {
-					panel.addShape(new Line(new Point(me.getX(), me.getY()), new Point(me.getX(), me.getY()), selected,
-							shapeColor));
-				} else if (shape == "Donut") {
-					panel.addShape(new Donut(new Point(me.getX(),me.getY()), 50, 70, selected, shapeColor, outerShapeColor));
-				} 
-				
+               for (Shape p : panel.getShapes()) { //iterate through each shape
 
-//                for (Shape s : panel.getShapes()) { //iterate through each shape
-// selection logic
-//                        panel.repaint(); // change will be shown
-//                    }
+                       panel.repaint(); // change will be shown
+                   }
 			}
 		});
 
@@ -130,11 +144,12 @@ public class Test implements ActionListener {
 		line.addActionListener(this);
 		point.addActionListener(this);
 		color.addActionListener(this);
+		modify.addActionListener(this);
 
 		window.add(panel, BorderLayout.CENTER);
 		window.add(btnPanel, BorderLayout.PAGE_END);
 
-		window.setSize(420, 420);
+		window.setSize(840, 840);
 		window.setVisible(true);
 		// window.pack();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -164,6 +179,10 @@ public class Test implements ActionListener {
 			shapeColor = Color.BLACK;
 			outerShapeColor = Color.BLACK;
 
+		} else if (e.getSource().equals(this.modify)) {
+			if(s != null) {
+				setVisible(false);
+			}
 		}
 		if (e.getSource().equals(this.color)) {
 			if (shape == "Circle") {
