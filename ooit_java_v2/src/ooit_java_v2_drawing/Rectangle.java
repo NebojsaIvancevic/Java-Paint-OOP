@@ -90,6 +90,7 @@ public class Rectangle extends SurfaceShape {
 				upperLeftPoint.getY() <= y &&
 				x <= upperLeftPoint.getX() + width &&
 				y <= upperLeftPoint.getY() + height) {
+			System.out.println("BUBBBLE");
 			return true;
 		} else {
 			return false;
@@ -105,6 +106,9 @@ public class Rectangle extends SurfaceShape {
 		} else {
 			return false;
 		}
+	}
+	public void clicked() {
+		System.out.println("Clicked on bubble");
 	}
 	
 	public Point getUpperLeftPoint() {
