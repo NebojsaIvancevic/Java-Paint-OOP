@@ -1,2 +1,2 @@
-# ooit_app_v2
+# Paint
 Basic paint clone using java.
