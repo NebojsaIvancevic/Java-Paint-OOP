@@ -1,4 +1,4 @@
-package ooit_java_v2_stack;
+package stack_java_oop;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -14,8 +14,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import ooit_java_v2_drawing.Point;
-import ooit_java_v2_drawing.Rectangle;
+import paint_java_oop.Point;
+import paint_java_oop.Rectangle;
 
 public class TestStack extends JDialog implements ActionListener {
 	/**

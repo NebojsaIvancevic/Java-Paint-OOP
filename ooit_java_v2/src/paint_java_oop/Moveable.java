@@ -1,4 +1,4 @@
-package ooit_java_v2_drawing;
+package paint_java_oop;
 
 public interface Moveable {
 

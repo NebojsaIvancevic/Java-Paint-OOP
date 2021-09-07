@@ -1,4 +1,4 @@
-package ooit_java_v2_sort;
+package sort_java_oop;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.ListModel;
 
-import ooit_java_v2_drawing.Point;
-import ooit_java_v2_drawing.Rectangle;
+import paint_java_oop.Point;
+import paint_java_oop.Rectangle;
 
 public class TestSort implements ActionListener {
 	private JFrame frame;
